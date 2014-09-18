@@ -26,9 +26,9 @@
     <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
 </div>
 
-<div id="impress" data-transition-duration="250" data-perspective="1000">
+<div id="impress" data-transition-duration="500" data-perspective="1000">
 
-    <div id="title" class="step" data-z="10000" data-y="-1000">
+    <div id="title" class="step" data-z="10000" data-x="1000" data-y="-1000">
         <h1>The Metaobject Protocol -<br/> What, how and when?</h1>
     </div>
 
@@ -212,7 +212,7 @@ type(bar)</code>
     </div>
 -->
 
-    <div class="step slide" data-x="1000" data-y="5000">
+    <div class="step slide" data-x="0" data-y="6000">
         <h1>Changing a class creation behaviour</h1>
         <p>
             <pre><code class="python">class Metaklass(type):
@@ -226,46 +226,63 @@ class Foo(object, metaclass=Metaklass):
 print("Create instance:")
 foo = Foo()
 print(foo)</code>
-<code class="output noformat">>> Test
+<code class="output noformat">>> Creating a new class called 'Foo'
    Create instance:
    <__main__.Foo object at 0x7fa23be234a8></code></pre>
         </p>
     </div>
 
-    <div class="step" data-x="2000" data-y="5000">
+    <div class="step" data-x="1500" data-y="5000">
+        <h1>Simple things you can do with Metaclasses in Python?</h1>
+    </div>
+
+    <div class="step slide" data-x="1500" data-y="6000">
+        <p><em>This list is, of course, open-ended</em></p>
+        <ul>
+        <li>Generate classes dynamically</li>
+        <li>Rearrange or replace the bases of a class</li>
+        <li>Store the order in which members are declared in a class</li>
+        <li>Replace the values assigned to a member and/or add/remove members</li>
+        <li>...</li>
+        </ul>
+    </div>
+
+    <div class="step" data-x="3000" data-y="5000">
         <h1>Basic rules for when to use the Metaobject Protocol:</h1>
     </div>
 
-    <div class="step slide" data-x="3000" data-y="5000">
+    <div class="step slide" data-x="3000" data-y="6000">
         <h1>Basically never</h1>
         <p>The Metaobject Protocol is very powerful and allows you to
         change most aspects of how Python works. Changing these things
         will make it that much harder for anyone, including future-you, to
-        understand your code or your libraries.</p>
-        <p><em>For more info read about LISP-macros; they suffer from the same
-        problem.</em></p>
+        understand your code.</p>
+        <p><em>For more info; read about LISP-macros, they suffer from mostly
+        the same problem.</em></p>
     </div>
 
-    <div class="step slide" data-x="4000" data-y="5000">
+    <div class="step slide" data-x="3000" data-y="7000">
         <h1>Potential exceptions from previous rule</h1>
         <ul>
             <li>Generating classes that represent objects in other languages or
-            other systems such as Databases, RESTful servers, etc.</li>
+            other systems such as C, Java, Databases, RESTful servers, filesystems, etc.</li>
             <li>Injecting debugging functionalities in complex system.</li>
             <li>Creating objects that emulate other languages or an application
             specific language.</li>
         </ul>
     </div>
 
-    <div class="step" data-x="3000" data-y="6000">
+    <div class="step" data-x="3000" data-y="9000">
         <h1>The golden rule about the Metaobject Protocol</h1>
-        <q>If you don't know, for sure, that you need to use it: <strong>Don't do it!</strong></q>
+        <q>Metaclasses are deeper magic than 99% of users should ever worry about. If you wonder whether you need them, you don’t (the people who actually need them know with certainty that they need them, and don’t need an explanation about why).</q>
+        <strong>Tim Peters</strong>
     </div>
 
-    <div id="about" class="step" data-z="1000" data-x="2000" data-y="2500">
+    <div id="about" class="step" data-z="3000" data-x="2000" data-y="1000">
         <p>Krister Svanlund</p>
         <p><strong>E-mail:</strong><a href="mailto:krister.svanlund@gmail.com">krister.svanlund@gmail.com</a></p>
         <p><strong>Twitter:</strong> <a href="http://www.twitter.com/kofish">@kofish</a></p>
+        <p>Presentation created using <a href="https://github.com/bartaz/impress.js">impress.js</a></p>
     </div>
 
     <div id="overview" class="step" data-x="2000" data-y="2500" data-scale="7">
