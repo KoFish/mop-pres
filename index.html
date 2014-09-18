@@ -29,23 +29,23 @@
 <div id="impress" data-transition-duration="250" data-perspective="1000">
 
     <div id="title" class="step" data-z="10000" data-y="-1000">
-    <h1>The Metaobject Protocol -<br/> What, how and when?</h1>
+        <h1>The Metaobject Protocol -<br/> What, how and when?</h1>
     </div>
 
-    <div id="intro" class="step slide" data-x="-1000" data-y="0">
+    <div id="intro" class="step" data-x="-1000" data-y="0">
         <q>The metaobject protocol approach, [..] is based on the idea that one
         can and should "open language up," allowing users to adjust the design
         and implementation to suit their particular needs.</q>
         <strong>Art of the Metaobject Protocol p.1</strong>
     </div>
 
-    <div class="step slide" data-x="0" data-y="0">
+    <div class="step" data-x="0" data-y="0">
         <q>In a language based upon our metaobject protocols, the language
         implementation itself is structured as an object-oriented program.</q>
         <strong>Art of the Metaobject Protocol p.1</strong>
     </div>
 
-    <div id="what-mop" class="step" data-x="1000" data-y="0">
+    <div id="what-mop" class="step" data-x="0" data-y="-1000">
         <h2>What is the Metaobject Protocol?</h2>
     </div>
 
@@ -82,8 +82,12 @@
         </p>
     </div>
 
+    <div class="step" data-x="1000" data-y="800">
+        <h1>The Metaobject Protocol by Example</h1>
+    </div>
+
     <div class="step" data-x="1000" data-y="1000">
-        <h1>Python <small>Python 3.4.1 - <a href="http://www.python.org">www.python.org</a></small></h1>
+        <h2>in Python <small>Python 3.4.1 - <a href="http://www.python.org">www.python.org</a></small></h2>
     </div>
 
     <div class="step slide" data-x="1000" data-y="2000">
@@ -107,16 +111,36 @@
     def hello(self):
         return "Hello, {}".format(self.__class__.__name__)
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # Only execute the following if not imported
     world = World()
     print world.hello()</code>
 <code class="output noformat">>> Hello, World!</code></pre>
         </p>
     </div>
 
+    <div class="step" data-x="2000" data-y="2000">
+        <q>In a language based upon our metaobject protocols, the language
+        implementation itself is structured as an object-oriented program.</q>
+        <strong>Art of the Metaobject Protocol p.1</strong>
+    </div>
+
+    <div class="step" data-x="3000" data-y="2000">
+        <q>[I]ndividual decisions about the behaviour of the language are
+        encoded in a protocol operating on these metaobjects -- a metaobject
+        protocol.</q><strong>Art of the Metaobject Protocol p.7</strong>
+    </div>
+
     <div class="step slide" data-x="2000" data-y="3000">
+        <h1>Python and the Metaobject Protocol</h1>
+        <q>In Python, most everything is an object</q><strong>Three slides ago</strong>
+        <p><small><strong>Basic knowledge:</strong> Objects, in Python, are
+        instances of a class.</small></p>
         <p>Overloading special methods when declaring classes changes the
         behaviour of language operations.</p>
+        <p>In other words:</p>
+    </div>
+
+    <div class="step slide" data-x="2000" data-y="3000" data-z="-100" data-rotate-y="180">
         <pre><code class="python">class Foo(object):
     def __init__(self, *a, **kw):
         pass  # This is the object constructor.
@@ -125,44 +149,57 @@ if __name__ == '__main__':
         pass  # This is called when the object is garbage collected
 
     def __getattr__(self, key):
-        pass  # This is the function called when looking up attributes
-              # such foo.bar => foo.__getattr__('bar')</code></pre>
-    </div>
-    <div class="step" data-x="3000" data-y="3000">
-        <q>In a language based upon our metaobject protocols, the language
-        implementation itself is structured as an object-oriented program.</q>
-        <strong>Art of the Metaobject Protocol p.1</strong>
+        pass  # This is the method called when looking up attributes
+              # such `foo.bar` => `foo.__getattr__('bar')`
+
+    def __add__(self, b):
+        pass  # This method is called when adding something to the object with
+              # the + operator so `foo + 42` =>  `foo.__call__(42)`
+
+    def __call__(self, *a, **kw):
+        pass  # This method is called when using the object as a function.</code></pre>
     </div>
 
-    <div class="step slide" data-x="1000" data-y="4000">
-        <h1>Python and the Metaobject Protocol</h1>
-        <q>In Python, most everything is an object</q><strong>Two slides ago</strong>
-        <p><small><strong>Basic knowledge:</strong> Objects, in Python, are
-        instances of a class.</small></p>
-        <pre><code class="python">foo = Foo()
+    <div class="step" data-x="2000" data-y="4000" data-z="-100" data-rotate-y="180">
+        <h3>Since everything in Python is objects, the metaobject protocol allows
+        manipulation of most of the basic functionalities of the language.
+        Including how objects are created.</h3>
+    </div>
+
+    <div class="step" data-x="3000" data-y="3000">
+        <h1>The class of an object</h1>
+        <p>
+            <pre><code class="python">foo = Foo()
 print(type(foo))</code>
 <code class="output noformat">>> __main__.Foo</code></pre>
+        </p>
+    </div>
+    <div class="step" data-x="4000" data-y="3000">
+        <h2>So if everything is objects, what about classes?</h2>
     </div>
 
-    <div class="step slide" data-x="2000" data-y="4000">
+    <div class="step" data-x="5000" data-y="3000">
         <h1>The class of a class</h1>
-        <p>So what is the class of a class, or in other words: What is the metaclass?</p>
         <pre><code class="python">print(type(Foo))</code>
 <code class="output noformat">>> type</code></pre>
     </div>
 
-    <div class="step slide" data-x="3000" data-y="4000">
+    <div class="step slide" data-x="0" data-y="5000">
         <h1>The metaclass</h1>
         <p>As the metaclass, <tt><code class="python">type</code></tt> is the
         default object that defines how a class is created in Python; Just as
         a class defines how an object is created.</p>
+        <p><tt><code class="noformat">metaclass => class</code></tt></p>
+        <p><tt><code class="noformat">class => object</code></tt></p>
         <p><tt><code class="python">type(name, bases, dict)</code></tt> can also
-        be used to create new classes when used as a class on its own. The
-        <tt><code class="python">type(obj)</code></tt>, showing the class of an
-        object, behaviour is just available for backward compatibility.
+        be used to create new classes when used as a class on its own.</p>
+        <p>The <tt><code class="python">type(obj)</code></tt>, showing the class
+        of an object, behaviour is just available for backward compatibility.
+        </p>
     </div>
 
-    <div class="step slide" data-x="4000" data-y="4000">
+<!--
+    <div class="step slide" data-x="1000" data-y="5000">
         <h1>Two ways of defining a class</h1>
         <p>
         <pre><code class="python">Bar = type('Bar', (object,), {})</code>
@@ -173,8 +210,65 @@ type(bar)</code>
 <code class="output noformat">>> __main__.Bar</code></pre>
         </p>
     </div>
+-->
 
-    <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
+    <div class="step slide" data-x="1000" data-y="5000">
+        <h1>Changing a class creation behaviour</h1>
+        <p>
+            <pre><code class="python">class Metaklass(type):
+    def __init__(self, name, bases, dict):
+        print("Creating a new class called '{}'".format(name))
+        super(Metaklass, self).__init__(name, bases, dict)
+
+class Foo(object, metaclass=Metaklass):
+    pass
+
+print("Create instance:")
+foo = Foo()
+print(foo)</code>
+<code class="output noformat">>> Test
+   Create instance:
+   <__main__.Foo object at 0x7fa23be234a8></code></pre>
+        </p>
+    </div>
+
+    <div class="step" data-x="2000" data-y="5000">
+        <h1>Basic rules for when to use the Metaobject Protocol:</h1>
+    </div>
+
+    <div class="step slide" data-x="3000" data-y="5000">
+        <h1>Basically never</h1>
+        <p>The Metaobject Protocol is very powerful and allows you to
+        change most aspects of how Python works. Changing these things
+        will make it that much harder for anyone, including future-you, to
+        understand your code or your libraries.</p>
+        <p><em>For more info read about LISP-macros; they suffer from the same
+        problem.</em></p>
+    </div>
+
+    <div class="step slide" data-x="4000" data-y="5000">
+        <h1>Potential exceptions from previous rule</h1>
+        <ul>
+            <li>Generating classes that represent objects in other languages or
+            other systems such as Databases, RESTful servers, etc.</li>
+            <li>Injecting debugging functionalities in complex system.</li>
+            <li>Creating objects that emulate other languages or an application
+            specific language.</li>
+        </ul>
+    </div>
+
+    <div class="step" data-x="3000" data-y="6000">
+        <h1>The golden rule about the Metaobject Protocol</h1>
+        <q>If you don't know, for sure, that you need to use it: <strong>Don't do it!</strong></q>
+    </div>
+
+    <div id="about" class="step" data-z="1000" data-x="2000" data-y="2500">
+        <p>Krister Svanlund</p>
+        <p><strong>E-mail:</strong><a href="mailto:krister.svanlund@gmail.com">krister.svanlund@gmail.com</a></p>
+        <p><strong>Twitter:</strong> <a href="http://www.twitter.com/kofish">@kofish</a></p>
+    </div>
+
+    <div id="overview" class="step" data-x="2000" data-y="2500" data-scale="7">
     </div>
 
 </div>
